@@ -62,7 +62,7 @@ searchsize=500;
             interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">	&#x24BE; ${dotInterface.name} </td></tr><tr><td port="port2" border="1"></td></tr>"""
             interfaceStr += """<tr><td port="port3" border="1">"""
             for(member in dotInterface.memebrs){
-                interfaceStr += """<font color="blue">	&#x25CB;</font>${member.key} <b>:${member.value}${" ".repeat(dotInterface.longestMember - "${member.key}:${member.value}".length)}</b><br/>"""
+                interfaceStr += """<font color="blue">	&#x25CB;</font>${member.key}    <b>: ${member.value}${" ".repeat(dotInterface.longestMember - "${member.key}:${member.value}".length)}</b><br/>"""
             }
             interfaceStr += """</td></tr>"""
             interfaceStr += "</table></font>>];"
