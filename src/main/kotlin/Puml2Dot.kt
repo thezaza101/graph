@@ -26,8 +26,8 @@ class Puml2Dot(var puml:String) {
                 }
             }
 
-            if(line.contains("-->"))relations.add(line.replace("-->","->"))
-            if(line.contains("*--"))relations.add(line.replace("*--","->") + " [arrowtail=diamond, dir=back]")
+            if(line.contains("-->"))relations.add(line.replace("-->","->").replace(" ",""))
+            if(line.contains("*--"))relations.add(line.replace("*--","->").replace(" ","") + " [arrowtail=diamond, dir=back]")
         }
     }
 
@@ -35,7 +35,7 @@ class Puml2Dot(var puml:String) {
         val head = """
 digraph G {
 
-ontname = "Bitstream Vera Sans";
+fontname = "Bitstream Vera Sans";
 fontsize = 8
 
 node [
@@ -59,10 +59,10 @@ searchsize=500;
 
         for(dotInterface in interfaces){
             var interfaceStr = """${dotInterface.name}[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">	&#x24BE; ${dotInterface.name} </td></tr><tr><td port="port2" border="1"></td></tr>"""
+            interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">${dotInterface.name} </td></tr><tr><td port="port2" border="1"></td></tr>"""
             interfaceStr += """<tr><td port="port3" border="1">"""
             for(member in dotInterface.memebrs){
-                interfaceStr += """<font color="blue">	&#x25CB;</font>${member.key}    <b>: ${member.value}${" ".repeat(dotInterface.longestMember - "${member.key}:${member.value}".length)}</b><br/>"""
+                interfaceStr += """<font color="blue">	&#x25CB; </font>${member.key}    <b>: ${member.value}${" ".repeat(dotInterface.longestMember - "${member.key}:${member.value}".length)}</b><br/>"""
             }
             interfaceStr += """</td></tr>"""
             interfaceStr += "</table></font>>];"
@@ -72,10 +72,10 @@ searchsize=500;
 
         for(dotClass in classes){
             var classStr = """${dotClass.name}[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1"  bgcolor="#99ff99">	&#x24B8; ${dotClass.name} </td></tr>"""
+            classStr += """<tr><td port="port1" border="1"  bgcolor="#99ff99">${dotClass.name} </td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" >"""
             for(member in dotClass.memebrs) {
-                classStr += """&#x25A1; ${member.key} : <b>${member.value} </b>${" ".repeat(dotClass.longestMember - "${member.key}:${member.value}".length)}<br/>"""
+                classStr += """<font color="#8B0000"> &#x25A1; </font>${member.key} : <b>${member.value} </b>${" ".repeat(dotClass.longestMember - "${member.key}:${member.value}".length)}<br/>"""
             }
             classStr+="""</td></tr>"""
             classStr += """<tr><td port="port3" border="1"></td></tr></table></font>>];"""

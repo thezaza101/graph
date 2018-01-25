@@ -8,7 +8,7 @@ class DotClass(classDef:String, iterator:Iterator<String> ) {
     var longestMember = 0
 
     init{
-        name = classDef.removePrefix("class  ").removeSuffix(" {")
+        name = classDef.removePrefix("class  ").removeSuffix(" {").replace(" ","")
         while(iterator.hasNext()){
             val next = iterator.next()
             if(next.startsWith("\t - ")){

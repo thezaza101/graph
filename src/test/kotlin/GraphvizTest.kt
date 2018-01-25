@@ -17,49 +17,48 @@ skinparam class {
 	BorderColor DimGray
 }
 
-class  Definition {
+class  Pet {
+	 - id <b>:Int64</b>
 	 - name <b>:String</b>
-	 - domain <b>:String</b>
-	 - definition <b>:String</b>
-	 - guidance <b>:String</b>
-	 - identifier <b>:Uri</b>
-	 - usage <b>:String[]</b>
+	 - tag <b>:String</b>
 }
 
-class  Results {
-	 - content <b>:Definition[]</b>
-	 - numberOfElements <b>:Integer</b>
-	 - firstPage <b>:Boolean</b>
-	 - lastPage <b>:Boolean</b>
-	 - totalPages <b>:Integer</b>
-	 - id <b>:Link[]</b>
-	 - links <b>:Link[]</b>
+class  NewPet {
+	 - name <b>:String</b>
+	 - tag <b>:String</b>
 }
 
-class  Link {
-	 - rel <b>:String</b>
-	 - href <b>:String</b>
+class  Error {
+	 - code <b>:Int32</b>
+	 - message <b>:String</b>
 }
 
 
-interface DefinitionsApi {
-	 + <i>null(String domain,String id)</i><b>:Definition</b>
+interface FindPetsApi {
+	 + <i>findPets(String[] tags,Integer limit)</i><b>:Pet[]</b>  <b><color:red> throws Error </color> </b>
 }
 
-interface DefinitionsApi {
-	 + <i>getDefinitions(Integer page,Integer size)</i><b>:Results</b>
+interface AddPetApi {
+	 + <i>addPet(NewPet pet)</i><b>:Pet</b>  <b><color:red> throws Error </color> </b>
 }
 
-interface SearchApi {
-	 + <i>null(String query,String domain,Integer page,Integer size)</i><b>:Results</b>
+interface Find Pet By IdApi {
+	 + <i>find pet by id(Integer id)</i><b>:Pet</b>  <b><color:red> throws Error </color> </b>
+}
+
+interface DeletePetApi {
+	 + <i>deletePet(Integer id)</i><b>:void</b>  <b><color:red> throws Error </color> </b>
 }
 
 
-Results  *--   Definition
-Results  *--   Link
-DefinitionsApi -->    Definition
-DefinitionsApi -->    Results
-SearchApi -->    Results
+FindPetsApi -->    Pet
+FindPetsApi -->    Error
+AddPetApi -->    Pet
+AddPetApi -->    NewPet
+AddPetApi -->    Error
+Find Pet By IdApi -->    Pet
+Find Pet By IdApi -->    Error
+DeletePetApi -->    Error
 
 
 @enduml
@@ -86,8 +85,9 @@ SearchApi -->    Results
     @Test
     fun can_get_dot_from_puml(){
         val puml2Dot = Puml2Dot(puml)
-        Assert.assertTrue(puml2Dot.classes.filter { it.name == "Definition" }.isNotEmpty())
+        Assert.assertTrue(puml2Dot.classes.filter { it.name == "Pet" }.isNotEmpty())
         Assert.assertEquals(3,puml2Dot.classes.size)
+        println(puml2Dot.interfaces)
         //println(puml2Dot.dot())
     }
 }

@@ -15,14 +15,14 @@ class DotInterface(interfaceDef:String, iterator:Iterator<String> ) {
     var longestMember = 0
 
     init{
-        name = interfaceDef.removePrefix("interface ").removeSuffix(" {")
+        name = interfaceDef.removePrefix("interface ").removeSuffix(" {").replace(" ","")
         while(iterator.hasNext()){
             val next = iterator.next()
             if(next.startsWith("\t + ")){
                 var memberParts = next.replace("<i>","").replace("</i>","").replace("<b>","").replace("</b>","").split(":")
                 //println(memberParts)
                 var memberName = memberParts[0].removePrefix("\t + ").removeSuffix(" <b>")
-                var memberType = memberParts[1]
+                var memberType = memberParts[1].split("<")[0]
                 memebrs.put(memberName, memberType)
 
                 val combined = "${memberName}:${memberType}"
