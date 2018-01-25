@@ -15,9 +15,9 @@ class Controller {
 
 
     @RequestMapping("/swagger.svg")
-    fun swagger(@RequestParam swaggerUrl:String): String{
+    fun swagger(@RequestParam url:String): String{
 
-        val swaggerURL = URL(swaggerUrl)
+        val swaggerURL = URL(url)
         val swaggerText = swaggerURL.readText()
         val md5= hashString("MD5",swaggerText)
 
