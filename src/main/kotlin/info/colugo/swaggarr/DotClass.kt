@@ -1,4 +1,4 @@
-package info.colugo.swagger2uml
+package info.colugo.swaggarr
 
 class DotClass(classDef:String, iterator:Iterator<String> ) {
 

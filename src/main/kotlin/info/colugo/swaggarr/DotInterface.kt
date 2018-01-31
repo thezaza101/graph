@@ -1,4 +1,4 @@
-package info.colugo.swagger2uml
+package info.colugo.swaggarr
 
 class DotInterface(interfaceDef:String, iterator:Iterator<String> ) {
 

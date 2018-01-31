@@ -1,4 +1,4 @@
-package info.colugo.swagger2uml
+package info.colugo.swaggarr
 
 class Puml2Dot(var puml:String) {
 

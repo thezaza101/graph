@@ -1,4 +1,4 @@
-import info.colugo.swagger2uml.Puml2Dot
+import info.colugo.swaggarr.Puml2Dot
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser
 import org.junit.Assert

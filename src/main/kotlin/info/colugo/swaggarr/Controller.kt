@@ -1,4 +1,4 @@
-package info.colugo.swagger2uml
+package info.colugo.swaggarr
 
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser
