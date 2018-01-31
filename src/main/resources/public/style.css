@@ -6,31 +6,16 @@ body {
 	padding: 40px 0 0 0;
 }
 
-.centered h1 {
-	text-align: center;
-	color: white;
-	/*margin-left: -83px;*/
-}
-
-.centered p {
-	text-align: center;
-	color: white;
-}
-
 .centered a {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	/* bring your own prefixes */
-	transform: translate(-50%, -50%);
-	margin-top: 139px;
-	/*margin-left: -44px;*/
 	font-weight: bold;
 	color: #9DBEE8;
 	font-size: xx-large;
 }
 
-.centered img {
-	margin-left: 32px;
-	margin-top: -21px;
+.centered {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
 }
