@@ -1,6 +1,8 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
 
+import au.gov.dxa.graph.RelationBuilder
+import au.gov.dxa.graph.Relations
 import org.junit.Assert
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser

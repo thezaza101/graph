@@ -1,7 +1,6 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
-
-import info.colugo.swaggarr.Puml2Dot
+import au.gov.dxa.graph.Puml2Dot
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser
 import org.junit.Assert

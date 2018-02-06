@@ -1,4 +1,4 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
 class DotInterface(interfaceDef:String, iterator:Iterator<String> ) {
 

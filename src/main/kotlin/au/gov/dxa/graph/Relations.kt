@@ -1,4 +1,4 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.JsonObject

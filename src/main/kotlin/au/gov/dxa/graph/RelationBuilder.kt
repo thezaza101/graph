@@ -1,4 +1,4 @@
-package info.colugo.swaggarr
+package au.gov.dxa.graph
 
 class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: Map<String, String>){
 
@@ -45,19 +45,18 @@ class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: M
 digraph G {
 
 fontname = "Bitstream Vera Sans";
-fontsize = 8
 
 node [
 fontname = "Bitstream Vera Sans"
-fontsize = 8
-shape="none"
+fontsize = 10
+shape="plain"
 ]
 
 edge [
 arrowsize=0.8
 minlen=1
 fontname = "Courier"
-fontsize="6"
+fontsize="8"
 ]
 
 nodesep=0.486111;
@@ -69,21 +68,27 @@ searchsize=500;
         var output = ""
 
         for(theClass in things) {
-            var classStr = """"${theClass}"[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">${nameMap[theClass]?:theClass} </td></tr></table></font>>]"""
+            var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            classStr += """<tr><td port="port1" border="1" color="#ED6A5A" bgcolor="#ED6A5A"><font POINT-SIZE="12" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
+            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd"></td></tr>"""
+            classStr += """</table></font>>];"""
 
             output += "\n${classStr}\n"
         }
 
+        /*
+        label=<<font face="Courier" size="6"><table border="6" color="white" cellspacing="0" style="rounded" ><tr><td port="port1" border="1" color="#68AFCB" bgcolor="#68AFCB"><font color="white">Address </font></td></tr><tr > <td port = "port2" border ="1" color="#EBEBEB" bgcolor="#EBEBEB">
+         */
+
         for(theClass in classes.keys){
-            var classStr = """"${theClass}"[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1"  bgcolor="#99ff99">${nameMap[theClass]?:theClass} </td></tr>"""
-            classStr += """<tr > <td port = "port2" border ="1" >"""
+            var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            classStr += """<tr><td port="port1" border="1" color="#68AFCB" bgcolor="#68AFCB"><font POINT-SIZE="14" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
+            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">"""
             for(member in classes[theClass]!!) {
                 classStr += """<font color="#8B0000"> &#x25A1; </font>${member + " ".repeat(classAttributePadding[theClass]!! - member.length)}   <br/>"""
             }
             classStr+="""</td></tr>"""
-            classStr += """<tr><td port="port3" border="1"></td></tr></table></font>>];"""
+            classStr += """</table></font>>];"""
 
             output += "\n${classStr}\n"
         }
