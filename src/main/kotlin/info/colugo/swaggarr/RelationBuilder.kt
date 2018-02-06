@@ -12,7 +12,7 @@ class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: M
         val members = map["skos:member"]
         if(members != null) {
             for (member in members) {
-                val className = nameMap[member.from]?:member.from
+                val className = member.from//nameMap[member.from]?:member.from
                 val attributeName = nameMap[member.to]?:member.to
 
                 if(!classes.containsKey(className)){
@@ -29,8 +29,8 @@ class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: M
         val seeAlso = map["rdfs:seeAlso"]
         if(seeAlso != null) {
             for (see in seeAlso) {
-                val fromName = nameMap[see.from]?:see.from
-                val toName = nameMap[see.to]?:see.to
+                val fromName = see.from//nameMap[see.from]?:see.from
+                val toName = see.to//nameMap[see.to]?:see.to
                 things.add(fromName)
                 things.add(toName)
 
@@ -70,14 +70,14 @@ searchsize=500;
 
         for(theClass in things) {
             var classStr = """"${theClass}"[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">${theClass} </td></tr></table></font>>]"""
+            classStr += """<tr><td port="port1" border="1"  bgcolor="#cce5ff">${nameMap[theClass]?:theClass} </td></tr></table></font>>]"""
 
             output += "\n${classStr}\n"
         }
 
         for(theClass in classes.keys){
             var classStr = """"${theClass}"[label=<<font face="Courier" size="6"><table border="0" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1"  bgcolor="#99ff99">${theClass} </td></tr>"""
+            classStr += """<tr><td port="port1" border="1"  bgcolor="#99ff99">${nameMap[theClass]?:theClass} </td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" >"""
             for(member in classes[theClass]!!) {
                 classStr += """<font color="#8B0000"> &#x25A1; </font>${member + " ".repeat(classAttributePadding[theClass]!! - member.length)}   <br/>"""
