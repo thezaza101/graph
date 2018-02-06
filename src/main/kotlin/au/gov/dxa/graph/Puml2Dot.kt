@@ -40,7 +40,7 @@ fontname = "Bitstream Vera Sans";
 node [
 fontname = "Bitstream Vera Sans"
 fontsize = 10
-shape="plain"
+shape="none"
 ]
 
 edge [
