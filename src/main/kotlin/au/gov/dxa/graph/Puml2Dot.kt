@@ -60,7 +60,7 @@ searchsize=500;
 
         for(dotInterface in interfaces){
             var interfaceStr = """${dotInterface.name}[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
-            interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#73956F" color="#73956F"><font point-size="14" color="white">${dotInterface.name} </font></td></tr>"""
+            interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#ED6A5A" color="#ED6A5A"><font point-size="14" color="white">${dotInterface.name} </font></td></tr>"""
             interfaceStr += """<tr><td port="port3" border="1" bgcolor="#dddddd" color="#dddddd" >"""
             for(member in dotInterface.memebrs){
                 interfaceStr += """<font color="blue">	&#x25CB; </font>${member.key}    <b>: ${member.value}${" ".repeat(dotInterface.longestMember - "${member.key}:${member.value}".length)}</b><br/>"""
