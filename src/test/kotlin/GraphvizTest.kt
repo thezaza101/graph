@@ -1,3 +1,6 @@
+package info.colugo.swaggarr
+
+
 import info.colugo.swaggarr.Puml2Dot
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser
@@ -67,7 +70,7 @@ DeletePetApi -->    Error
 
     @Test
     fun can_get_puml_from_swagger(){
-        val swaggerText = GraphvizTest::class.java.getResource("swagger.json").readText()
+        val swaggerText = GraphvizTest::class.java.getResource("/swagger.json").readText()
         Assert.assertNotNull(swaggerText)
         Assert.assertNotEquals("",swaggerText)
 
@@ -87,7 +90,7 @@ DeletePetApi -->    Error
         val puml2Dot = Puml2Dot(puml)
         Assert.assertTrue(puml2Dot.classes.filter { it.name == "Pet" }.isNotEmpty())
         Assert.assertEquals(3,puml2Dot.classes.size)
-        println(puml2Dot.interfaces)
+        //println(puml2Dot.interfaces)
         //println(puml2Dot.dot())
     }
 }

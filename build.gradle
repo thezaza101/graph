@@ -42,4 +42,6 @@ dependencies {
     compile "io.swagger:swagger-parser:$swaggerparser"
     compile "com.github.spullara.mustache.java:compiler:$mustache"
 
+    compile 'com.beust:klaxon:2.1.4'
+
 }

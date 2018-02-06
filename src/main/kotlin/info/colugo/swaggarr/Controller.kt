@@ -45,6 +45,35 @@ class Controller {
     }
 
 
+    @RequestMapping("/relations.svg")
+    fun relations(@RequestParam url:String): String{
+
+
+        val md5= hashString("MD5",url)
+
+        val f =  File("${md5}.dot.svg")
+        if (!f.isFile()) {
+
+            val relations = Relations(url)
+            val map = relations.relationMap
+            val nameMap = relations.nameLookup
+            val output = RelationBuilder(map, nameMap).dot()
+
+            File("${md5}.dot").printWriter().use { out ->
+                out.write(output)
+            }
+
+            val p = Runtime.getRuntime().exec("dot -Tsvg -O ${md5}.dot")
+            p.waitFor()
+
+        }
+
+        var svg = File("${md5}.dot.svg").readText()
+        return svg
+
+    }
+
+
     private fun hashString(type: String, input: String) =
             MessageDigest
                     .getInstance(type)
