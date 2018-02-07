@@ -57,6 +57,12 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
         return "68AFCB"
     }
 
+
+    fun noContentClassWithURIColour(classUri:String ): String{
+        if(classUri == url.replace("/api","")) return "ED6A5A"
+        return "EDAE49"
+    }
+
     fun dot():String{
         val head = """
 digraph G {
@@ -86,7 +92,7 @@ searchsize=500;
 
         for(theClass in things) {
             var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1" color="#${classWithURIColour(theClass)}" bgcolor="#${classWithURIColour(theClass)}"><font POINT-SIZE="12" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
+            classStr += """<tr><td port="port1" border="1" color="#${noContentClassWithURIColour(theClass)}" bgcolor="#${noContentClassWithURIColour(theClass)}"><font POINT-SIZE="12" color="white">  ${nameMap[theClass]?:theClass}   </font></td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd"></td></tr>"""
             classStr += """</table></font>>];"""
 
