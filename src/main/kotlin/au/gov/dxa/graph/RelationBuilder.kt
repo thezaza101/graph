@@ -6,7 +6,6 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
     private val relations = mutableListOf<String>()
     private val classAttributePadding = mutableMapOf<String, Int>()
     private val things = mutableSetOf<String>()
-    private var hightlightName = ""
 
 
     init{
@@ -14,9 +13,7 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
         if(members != null) {
             for (member in members) {
                 val className = member.from
-                if(className == url.replace("/api","")) hightlightName = className
                 val attributeName = nameMap[member.to]?:member.to
-                if(member.to == url.replace("/api","")) hightlightName = className
 
                 if(!classes.containsKey(className)){
                     classes[className] = mutableListOf()
@@ -56,7 +53,7 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
 
 
     fun classWithURIColour(classUri:String ): String{
-        if(classUri == hightlightName) return "ED6A5A"
+        if(classUri == url.replace("/api","")) return "ED6A5A"
         return "68AFCB"
     }
 
