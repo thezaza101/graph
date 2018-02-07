@@ -1,19 +1,22 @@
 package au.gov.dxa.graph
 
-class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: Map<String, String>){
+class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>, var nameMap: Map<String, String>){
 
     private val classes = mutableMapOf<String, MutableList<String>>()
     private val relations = mutableListOf<String>()
     private val classAttributePadding = mutableMapOf<String, Int>()
     private val things = mutableSetOf<String>()
+    private var hightlightName = ""
 
 
     init{
         val members = map["skos:member"]
         if(members != null) {
             for (member in members) {
-                val className = member.from//nameMap[member.from]?:member.from
+                val className = member.from
+                if(className == url.replace("/api","")) hightlightName = className
                 val attributeName = nameMap[member.to]?:member.to
+                if(member.to == url.replace("/api","")) hightlightName = className
 
                 if(!classes.containsKey(className)){
                     classes[className] = mutableListOf()
@@ -39,6 +42,11 @@ class RelationBuilder(var map:Map<String, MutableList<Relation>>, var nameMap: M
         }
     }
 
+
+    fun classWithURIColour(classUri:String ): String{
+        if(classUri == hightlightName) return "ED6A5A"
+        return "68AFCB"
+    }
 
     fun dot():String{
         val head = """
@@ -69,20 +77,17 @@ searchsize=500;
 
         for(theClass in things) {
             var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1" color="#ED6A5A" bgcolor="#ED6A5A"><font POINT-SIZE="12" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
+            classStr += """<tr><td port="port1" border="1" color="#${classWithURIColour(theClass)}" bgcolor="#${classWithURIColour(theClass)}"><font POINT-SIZE="12" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd"></td></tr>"""
             classStr += """</table></font>>];"""
 
             output += "\n${classStr}\n"
         }
 
-        /*
-        label=<<font face="Courier" size="6"><table border="6" color="white" cellspacing="0" style="rounded" ><tr><td port="port1" border="1" color="#68AFCB" bgcolor="#68AFCB"><font color="white">Address </font></td></tr><tr > <td port = "port2" border ="1" color="#EBEBEB" bgcolor="#EBEBEB">
-         */
 
         for(theClass in classes.keys){
             var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
-            classStr += """<tr><td port="port1" border="1" color="#68AFCB" bgcolor="#68AFCB"><font POINT-SIZE="14" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
+            classStr += """<tr><td port="port1" border="1" color="#${classWithURIColour(theClass)}" bgcolor="#${classWithURIColour(theClass)}"><font POINT-SIZE="14" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">"""
             for(member in classes[theClass]!!) {
                 classStr += """<font color="#8B0000"> &#x25A1; </font>${member + " ".repeat(classAttributePadding[theClass]!! - member.length)}   <br/>"""

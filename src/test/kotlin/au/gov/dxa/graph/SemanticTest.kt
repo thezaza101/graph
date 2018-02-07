@@ -22,9 +22,10 @@ class SemanticTest {
         val relations = Relations(id)
         val map = relations.relationMap
         val nameMap = relations.nameLookup
+        println(RelationBuilder(relations.identifier, map, nameMap).dot())
         Assert.assertEquals(2, map.size)
         Assert.assertTrue(map.containsKey("skos:member"))
         Assert.assertTrue(map.containsKey("rdfs:seeAlso"))
-        println(RelationBuilder(map, nameMap).dot())
+
     }
 }

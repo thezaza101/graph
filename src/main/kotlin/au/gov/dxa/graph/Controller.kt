@@ -57,7 +57,7 @@ class Controller {
             val relations = Relations(url)
             val map = relations.relationMap
             val nameMap = relations.nameLookup
-            val output = RelationBuilder(map, nameMap).dot()
+            val output = RelationBuilder(relations.identifier, map, nameMap).dot()
 
             File("${md5}.dot").printWriter().use { out ->
                 out.write(output)

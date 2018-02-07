@@ -13,6 +13,7 @@ class Relations(var id:String) {
     var relationMap = mutableMapOf<String, MutableList<Relation>>()
     var urlsRead = mutableListOf<String>()
     var nameLookup = mutableMapOf<String, String>()
+    var identifier: String = ""
 
 
     init {
@@ -22,16 +23,18 @@ class Relations(var id:String) {
         val definitionJson = Parser().parse(StringBuilder().append(definitionText)) as JsonObject
         val links = definitionJson["links"] as JsonArray<JsonObject>
         val content = definitionJson["content"] as JsonObject
-        val identifier = content["identifier"] as String
+        identifier = content["identifier"] as String
         val relations = links.filter { it["rel"] == "relations" }.firstOrNull()
         if (relations != null) {
             relationsURL = relations["href"] as String ?: ""
-            if (relationsURL != "") populateMap(identifier, relationsURL)
+            if (relationsURL != "") populateMap(identifier, relationsURL, 0)
         }
     }
 
 
-    fun populateMap(theId: String, url: String) {
+    fun populateMap(theId: String, url: String, depth:Int) {
+
+        if(depth >= 3) return
 
         if (urlsRead.contains(url)) return
         urlsRead.add(url)
@@ -54,7 +57,7 @@ class Relations(var id:String) {
                 nameLookup[relation.to] = relation.toName
 
                 val newUrl = "http://ausdx.tk/api/relations/" + to.removePrefix("http://dxa.gov.au/definition/")
-                populateMap(to, newUrl)
+                populateMap(to, newUrl, depth + 1)
             }
             if (!relationMap.containsKey(relationName)) relationMap[relationName] = mutableListOf<Relation>()
             relationMap[relationName]!!.addAll(list)
