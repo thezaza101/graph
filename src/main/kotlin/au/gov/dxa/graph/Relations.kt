@@ -34,7 +34,7 @@ class Relations(var id:String) {
 
     fun populateMap(theId: String, url: String, depth:Int) {
 
-        if(depth >= 3) return
+        if(depth >= 2) return
 
         if (urlsRead.contains(url)) return
         urlsRead.add(url)
