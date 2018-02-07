@@ -18,7 +18,7 @@ class SemanticTest {
 
     @Test
     fun can_get_relations(){
-        val id = "http://definitions.ausdx.tk/api/definition/en/en5"
+        val id = "http://definitions.ausdx.tk/api/definition/en/en1"
         val relations = Relations(id)
         val map = relations.relationMap
         val nameMap = relations.nameLookup

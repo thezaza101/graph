@@ -40,6 +40,18 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
                 relations.add("\"${fromName}\" -> \"${toName}\"[arrowhead=none;label=\"  rdfs:seeAlso\"]")
             }
         }
+
+        val subClassOf = map["skos:subClassOf"]
+        if(subClassOf != null) {
+            for (sco in subClassOf) {
+                val fromName = sco.from//nameMap[see.from]?:see.from
+                val toName = sco.to//nameMap[see.to]?:see.to
+                things.add(fromName)
+                things.add(toName)
+
+                relations.add("\"${fromName}\" -> \"${toName}\"[arrowtail=empty;dir=\"back\";label=\"  skos:subClassOf\"]")
+            }
+        }
     }
 
 
