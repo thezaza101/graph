@@ -34,7 +34,7 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
                 things.add(fromName)
                 things.add(toName)
 
-                relations.add("\"${fromName}\" -> \"${toName}\"[arrowhead=none;label=\"  rdfs:seeAlso\"]")
+                relations.add("\"${getDefinitionURL(fromName)}\" -> \"${getDefinitionURL(toName)}\"[arrowhead=none;label=\"  rdfs:seeAlso\"]")
             }
         }
 
@@ -46,11 +46,17 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
                 things.add(fromName)
                 things.add(toName)
 
-                relations.add("\"${fromName}\" -> \"${toName}\"[arrowtail=empty;dir=\"back\";label=\"  skos:subClassOf\"]")
+                relations.add("\"${getDefinitionURL(fromName)}\" -> \"${getDefinitionURL(toName)}\"[arrowtail=empty;dir=\"back\";label=\"  skos:subClassOf\"]")
             }
         }
     }
 
+
+    fun getDefinitionURL(id:String):String{
+        // in:  http://dxa.gov.au/definition/en/en3
+        // out: http://definitions.ausdx.tk/definition/en/en3
+        return "http://definitions.ausdx.tk/" + id.removePrefix("http://dxa.gov.au/")
+    }
 
     fun classWithURIColour(classUri:String ): String{
         if(classUri == url.replace("/api","")) return "ED6A5A"
@@ -91,9 +97,9 @@ searchsize=500;
         var output = ""
 
         for(theClass in things) {
-            var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            var classStr = """"${getDefinitionURL(theClass)}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
             classStr += """<tr><td port="port1" border="1" color="#${noContentClassWithURIColour(theClass)}" bgcolor="#${noContentClassWithURIColour(theClass)}"><font POINT-SIZE="12" color="white">  ${nameMap[theClass]?:theClass}   </font></td></tr>"""
-            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd"></td></tr>"""
+            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">  Content Not Shown </td></tr>"""
             classStr += """</table></font>>];"""
 
             output += "\n${classStr}\n"
@@ -101,7 +107,7 @@ searchsize=500;
 
 
         for(theClass in classes.keys){
-            var classStr = """"${theClass}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            var classStr = """"${getDefinitionURL(theClass)}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
             classStr += """<tr><td port="port1" border="1" color="#${classWithURIColour(theClass)}" bgcolor="#${classWithURIColour(theClass)}"><font POINT-SIZE="14" color="white">${nameMap[theClass]?:theClass} </font></td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">"""
             for(member in classes[theClass]!!) {

@@ -14,11 +14,12 @@
 
     <xsl:template match="svg:g[@class = 'node']">
 
-        <xsl:element name="svg:a">
+        <xsl:element namespace="http://www.w3.org/2000/svg" name="a">
             <xsl:attribute name="xlink:href"><xsl:value-of select="svg:title/text()"/></xsl:attribute>
-            <g class="node" id="{@id}" style="cursor:hand">
+            <xsl:copy>
+                <xsl:attribute name="style">cursor:hand</xsl:attribute>
                 <xsl:apply-templates/>
-            </g>
+            </xsl:copy>
         </xsl:element>
     </xsl:template>
 

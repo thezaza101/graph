@@ -51,7 +51,7 @@ class Controller {
 
         val md5= hashString("MD5",url)
 
-        val f =  File("${md5}.dot.svg")
+        val f =  File("${md5}.svg")
         if (!f.isFile()) {
 
             val relations = Relations(url)
@@ -63,12 +63,13 @@ class Controller {
                 out.write(output)
             }
 
-            val p = Runtime.getRuntime().exec("dot -Tsvg -O ${md5}.dot")
+
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tsvg ${md5}.dot | xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
             p.waitFor()
 
         }
 
-        var svg = File("${md5}.dot.svg").readText()
+        var svg = File("${md5}.svg").readText()
         return svg
 
     }
