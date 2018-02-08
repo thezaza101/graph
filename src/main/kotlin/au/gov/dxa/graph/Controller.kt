@@ -64,7 +64,7 @@ class Controller {
             }
 
 
-            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tsvg ${md5}.dot -Gsize=10,10\\!| xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tsvg ${md5}.dot | xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
             p.waitFor()
 
         }
