@@ -12,6 +12,13 @@
     </xsl:template>
 
 
+    <xsl:template match="svg:svg">
+        <xsl:copy>
+                <xsl:attribute name="id">graph00</xsl:attribute>
+            <xsl:apply-templates/>
+        </xsl:copy>
+    </xsl:template>
+
     <xsl:template match="svg:g[@class = 'node']">
 
         <xsl:element namespace="http://www.w3.org/2000/svg" name="a">
