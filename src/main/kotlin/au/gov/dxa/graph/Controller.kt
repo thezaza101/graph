@@ -92,7 +92,7 @@ class Controller {
                 out.write(output)
             }
 
-            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tpng ${md5}.dot -Gsize=20,14\\! -Gdpi=100 -o$md5.png"))
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tpng ${md5}.dot -o$md5.png"))
             p.waitFor()
 
         }
