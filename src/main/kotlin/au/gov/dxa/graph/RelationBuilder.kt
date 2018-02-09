@@ -99,7 +99,7 @@ searchsize=500;
         for(theClass in things) {
             var classStr = """"${getDefinitionURL(theClass)}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
             classStr += """<tr><td port="port1" border="1" color="#${noContentClassWithURIColour(theClass)}" bgcolor="#${noContentClassWithURIColour(theClass)}"><font POINT-SIZE="12" color="white">  ${nameMap[theClass]?:theClass}   </font></td></tr>"""
-            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">  Content Not Shown </td></tr>"""
+            classStr += """<tr > <td port = "port2" border ="1" color="#dddddd" bgcolor="#dddddd">  </td></tr>"""
             classStr += """</table></font>>];"""
 
             output += "\n${classStr}\n"
