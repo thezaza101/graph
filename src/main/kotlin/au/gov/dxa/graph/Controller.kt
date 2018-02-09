@@ -63,7 +63,6 @@ class Controller {
                 out.write(output)
             }
 
-
             val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tsvg ${md5}.dot -Gsize=20,14\\! -Gdpi=100 | xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
             p.waitFor()
 
@@ -71,6 +70,35 @@ class Controller {
 
         var svg = File("${md5}.svg").readText()
         return svg
+
+    }
+
+
+    @RequestMapping("/relations.png")
+    fun relations_png(@RequestParam url:String): ByteArray{
+
+
+        val md5= hashString("MD5",url)
+
+        val f =  File("${md5}.png")
+        if (!f.isFile()) {
+
+            val relations = Relations(url)
+            val map = relations.relationMap
+            val nameMap = relations.nameLookup
+            val output = RelationBuilder(relations.identifier, map, nameMap).dot()
+
+            File("${md5}.dot").printWriter().use { out ->
+                out.write(output)
+            }
+
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tpng ${md5}.dot -Gsize=20,14\\! -Gdpi=100 -o$md5.png"))
+            p.waitFor()
+
+        }
+
+        var png = File("${md5}.png").readBytes()
+        return png
 
     }
 
