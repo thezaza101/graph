@@ -18,7 +18,12 @@ class Relations(var id:String) {
 
     init {
         val definitionUrl = URL(id)
-        val definitionText = definitionUrl.readText()
+        var definitionText = definitionUrl.readText()
+        // handle when http redirects to https
+        if(definitionText == "" && id.startsWith("http://")){
+            definitionText = URL("https" + id.removePrefix("http")).readText()
+        }
+
 
         val definitionJson = Parser().parse(StringBuilder().append(definitionText)) as JsonObject
         val links = definitionJson["links"] as JsonArray<JsonObject>
@@ -43,7 +48,7 @@ class Relations(var id:String) {
 
         val relationURL = URL(url)
         var relationText = relationURL.readText()
-        
+
         // handle when http redirects to https
         if(relationText == "" && url.startsWith("http://")){
             relationText = URL("https" + url.removePrefix("http")).readText()
