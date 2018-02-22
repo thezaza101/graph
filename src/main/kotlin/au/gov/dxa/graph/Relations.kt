@@ -42,9 +42,14 @@ class Relations(var id:String) {
         //println("Reading ${theId}'s relations from ${url}")
 
         val relationURL = URL(url)
-        val relationText = relationURL.readText()
+        var relationText = relationURL.readText()
+        
+        // handle when http redirects to https
+        if(relationText == "" && url.startsWith("http://")){
+            relationText = URL("https" + url.removePrefix("http")).readText()
+        }
 
-        val relationsJson = Parser().parse(StringBuilder().append(relationText)) as Map<String, JsonObject>
+        val relationsJson = Parser().parse(StringBuilder().append(relationText!!)) as Map<String, JsonObject>
 
         for (relationName in relationsJson.keys) {
             val list = mutableListOf<Relation>()
