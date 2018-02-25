@@ -13,7 +13,7 @@ class SemanticTest {
     fun can_get_relations_url(){
         val id = "http://definitions.ausdx.tk/api/definition/other/de17"
         val relations = Relations(id)
-        Assert.assertEquals("http://ausdx.tk/api/relations/other/de17", relations.relationsURL)
+        Assert.assertEquals("http://definitions.ausdx.tk/api/relations/other/de17", relations.relationsURL)
     }
 
     @Test
