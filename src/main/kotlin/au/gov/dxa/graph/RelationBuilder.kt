@@ -54,8 +54,8 @@ class RelationBuilder(var url:String, var map:Map<String, MutableList<Relation>>
 
     fun getDefinitionURL(id:String):String{
         // in:  http://dxa.gov.au/definition/en/en3
-        // out: http://definitions.ausdx.tk/definition/en/en3
-        return "http://definitions.ausdx.tk/" + id.removePrefix("http://dxa.gov.au/")
+        // out: http://definitions.ausdx.io/definition/en/en3
+        return "http://definitions.ausdx.io/" + id.removePrefix("http://dxa.gov.au/")
     }
 
     fun classWithURIColour(classUri:String ): String{

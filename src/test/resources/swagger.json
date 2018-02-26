@@ -12,7 +12,7 @@
       "url" : "https://opensource.org/licenses/MIT"
     }
   },
-  "host" : "ausdx.tk",
+  "host" : "ausdx.io",
   "basePath" : "/",
   "schemes" : [ "http" ],
   "paths" : {
