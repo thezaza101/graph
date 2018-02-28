@@ -2,6 +2,7 @@ package au.gov.dxa.graph
 
 import com.kicksolutions.swagger.plantuml.PlantUMLCodegen
 import io.swagger.parser.SwaggerParser
+import org.springframework.web.bind.annotation.CrossOrigin
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -13,7 +14,7 @@ import java.security.MessageDigest
 @RestController
 class Controller {
 
-
+    @CrossOrigin
     @RequestMapping("/swagger.svg")
     fun swagger(@RequestParam url:String): String{
 
@@ -44,7 +45,7 @@ class Controller {
 
     }
 
-
+    @CrossOrigin
     @RequestMapping("/relations.svg")
     fun relations(@RequestParam url:String): String{
 
@@ -74,6 +75,7 @@ class Controller {
     }
 
 
+    @CrossOrigin
     @RequestMapping("/relations.png")
     fun relations_png(@RequestParam url:String): ByteArray{
 
