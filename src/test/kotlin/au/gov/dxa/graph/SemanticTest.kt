@@ -11,9 +11,9 @@ class SemanticTest {
 
     @Test
     fun can_get_relations_url(){
-        val id = "http://definitions.ausdx.io/api/definition/other/de17"
+        val id = "http://definitions.ausdx.io/api/definition/trc/de17"
         val relations = Relations(id)
-        Assert.assertEquals("http://definitions.ausdx.io/api/relations/other/de17", relations.relationsURL)
+        Assert.assertEquals("http://definitions.ausdx.io/api/relations/trc/de17", relations.relationsURL)
     }
 
     @Test
@@ -22,7 +22,7 @@ class SemanticTest {
         val relations = Relations(id)
         val map = relations.relationMap
         val nameMap = relations.nameLookup
-        println(RelationBuilder(relations.identifier, map, nameMap).dot())
+        //println(RelationBuilder(relations.identifier, map, nameMap).dot())
 
 
     }
