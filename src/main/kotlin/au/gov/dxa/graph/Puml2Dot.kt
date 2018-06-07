@@ -26,8 +26,8 @@ class Puml2Dot(var puml:String) {
                 }
             }
 
-            if(line.contains("-->"))relations.add(line.replace("-->","->").replace(" ",""))
-            if(line.contains("*--"))relations.add(line.replace("*--","->").replace(" ","") + " [arrowtail=diamond, dir=back]")
+            if(line.contains("-->"))relations.add('"' + line.replace("-->","\"->\"").replace(" ","") + '"')
+            if(line.contains("*--"))relations.add('"' + line.replace("*--","\"->\"").replace(" ","") + "\" [arrowtail=diamond, dir=back]")
         }
     }
 
@@ -59,7 +59,7 @@ searchsize=500;
         var output = ""
 
         for(dotInterface in interfaces){
-            var interfaceStr = """${dotInterface.name}[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            var interfaceStr = """"${dotInterface.name}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
             interfaceStr += """<tr><td port="port1" border="1"  bgcolor="#ED6A5A" color="#ED6A5A"><font point-size="14" color="white">${dotInterface.name} </font></td></tr>"""
             interfaceStr += """<tr><td port="port3" border="1" bgcolor="#dddddd" color="#dddddd" >"""
             for(member in dotInterface.memebrs){
@@ -72,7 +72,7 @@ searchsize=500;
         }
 
         for(dotClass in classes){
-            var classStr = """${dotClass.name}[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
+            var classStr = """"${dotClass.name}"[label=<<font face="Courier"><table style="rounded" border="6" color="white" cellspacing="0">"""
             classStr += """<tr><td port="port1" border="1"  bgcolor="#68AFCB" color="#68AFCB"><font point-size="14" color="white">${dotClass.name} </font></td></tr>"""
             classStr += """<tr > <td port = "port2" border ="1"  bgcolor="#dddddd" color="#dddddd">"""
             for(member in dotClass.memebrs) {

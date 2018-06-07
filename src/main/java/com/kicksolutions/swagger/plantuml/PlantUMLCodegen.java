@@ -543,7 +543,7 @@ public class PlantUMLCodegen {
 		}else if (StringUtils.isNotEmpty(operation.getOperationId())) {
 			interfaceName = toTitleCase(operation.getOperationId());
 		}else {
-			interfaceName = toTitleCase(uri.replaceAll("{", "").replaceAll("}", "").replaceAll("\\", ""));
+			interfaceName = toTitleCase(uri.replace("{", "").replace("}", "").replace("\\", ""));
 		}
 
 		return new StringBuilder().append(interfaceName).append("Api").toString();
