@@ -66,7 +66,11 @@ class Relations(var id:String) {
                 if (relation.direction == "FROM") list.add(relation)
                 nameLookup[relation.to] = relation.toName
 
-                val newUrl = "http://definitions.ausdx.io/api/relations/" + to.removePrefix("http://dxa.gov.au/definition/")
+                // from: http://api.gov.au/definition/ce/ce52
+                // to: https://api.gov.au/definitions/api/relations/ce/ce1  
+                
+                //val newUrl = "http://api.gov.au/definitions/api/relations/" + to.removePrefix("http://dxa.gov.au/definition/")
+                val newUrl = to.replace("/definition/","/definitions/api/relations/")
                 populateMap(to, newUrl, depth + 1)
             }
             if (!relationMap.containsKey(relationName)) relationMap[relationName] = mutableListOf<Relation>()

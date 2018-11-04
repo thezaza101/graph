@@ -18,7 +18,7 @@ class Controller {
     @RequestMapping("/swagger.svg")
     fun swagger(@RequestParam url:String): String{
 
-        val swaggerURL = URL(url)
+        val swaggerURL = URL(url.replace(" ","%20"))
         val swaggerText = swaggerURL.readText()
         val md5= hashString("MD5",swaggerText)
 

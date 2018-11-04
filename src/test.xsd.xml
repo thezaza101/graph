@@ -1,0 +1,31 @@
+<Organisation>
+  <addresses>
+    <address>
+      <line1>string</line1>
+      <line2>string</line2>
+      <line3s>
+        <line3>string</line3>
+      </line3s>
+    </address>
+  </addresses>
+  <abn>string</abn>
+  <email>
+    <address>string</address>
+  </email>
+</Organisation>
+
+<Organisation>
+  <addresses>
+    <address>
+      <line1>foo</line1>
+      <line2>foo</line2>
+      <line3s>
+        <line3>foo</line3>
+      </line3s>
+    </address>
+  </addresses>
+  <abn>foo</abn>
+  <email>
+    <address>foo</address>
+  </email>
+</Organisation>
