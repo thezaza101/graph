@@ -34,8 +34,9 @@ class Controller {
             File("${md5}.dot").printWriter().use { out ->
                 out.write(output)
             }
+            println(File("${md5}.dot").getAbsolutePath())
 
-            val p = Runtime.getRuntime().exec("dot -Tsvg -O ${md5}.dot")
+            val p = Runtime.getRuntime().exec("/home/vcap/deps/0/bin/dot -Tsvg -O ${md5}.dot")
             p.waitFor()
 
         }
@@ -64,7 +65,7 @@ class Controller {
                 out.write(output)
             }
 
-            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tsvg ${md5}.dot -Gsize=20,14\\! -Gdpi=100 | xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","/home/vcap/deps/0/bin/dot -Tsvg ${md5}.dot -Gsize=20,14\\! -Gdpi=100 | /home/vcap/deps/0/bin/xsltproc --novalid AddLinks.xsl - > ${md5}.svg"))
             p.waitFor()
 
         }
@@ -94,7 +95,7 @@ class Controller {
                 out.write(output)
             }
 
-            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","dot -Tpng ${md5}.dot -o$md5.png"))
+            val p = Runtime.getRuntime().exec(arrayOf("/bin/sh","-c","/home/vcap/deps/0/bin/dot -Tpng ${md5}.dot -o$md5.png"))
             p.waitFor()
 
         }

@@ -33,6 +33,18 @@ jar {
     version = '1.0'
 }
 
+task addAptYaml(type: Exec) {
+    workingDir "${buildDir}/../"
+    commandLine 'zip', '-rv', 'build/libs/graph-1.0.jar', 'apt.yml'
+}
+task addAddLinks(type: Exec) {
+    workingDir "${buildDir}/../"
+    commandLine 'zip', '-rv', 'build/libs/graph-1.0.jar', 'AddLinks.xsl'
+}
+
+distZip.finalizedBy(addAptYaml)
+distZip.finalizedBy(addAddLinks)
+
 repositories {
     jcenter()
 }
