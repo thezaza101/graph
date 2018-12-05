@@ -32,6 +32,9 @@ jobs:
       - run: gradle clean assemble jar
       - run: java -jar build/libs/definitions-catalogue-1.0.jar &
       
+      # run tests!
+      - run: gradle test
+      
       # Set up CF
       - run:
           name: Setup CF CLI
