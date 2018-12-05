@@ -29,7 +29,6 @@ login() {
 # main script function
 #
 main() {
-  echo "logging in"
   login
   cf push api-gov-au-graph -f manifest-stating.yml
 }
