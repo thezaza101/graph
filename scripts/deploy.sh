@@ -20,7 +20,7 @@ login() {
     return
   fi
 
-  cf api $CF_PROD_API
+  cf api $CF_API
   cf auth "$CF_USER" "$CF_PASSWORD"
   cf target -o $CF_ORG
   cf target -s $CF_SPACE
